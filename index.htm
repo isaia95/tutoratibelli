@@ -285,17 +285,6 @@
 	var r;
 	responsivity();
 	/*primi due elementi coordinate e ultimo width*/
-	var coord=[
-		[[56,164,14],[89,91,10],[88,51,10],[123,36,14],[151,59,10],[151,101,14],[173,162,14],[99,76,4],[142,86,4],[114,119,6],[147,117,6],[115,141,4],[87,113,4]],
-		[[50,9,14],[107,24,10],[144,95,10],[97,118,14],[70,106,10],[22,47,14],[75,64,10]],
-		[[206,64,8],[160,3,10],[76,75,6],[101,89,4],[112,113,14],[132,58,10],[104,74,6]]];
-	var n_newton = coord[0].length;
-	var n_euler = coord[1].length;
-	var n_kirchoff = coord[2].length;
-	generateStars();
-	setInterval(function(){
-		sparkling();
-		}, 800);
 	
 	function responsivity(){
 		if(window.innerWidth<=480)
@@ -303,59 +292,6 @@
 		else
 			r = 1;
 		console.log(window.innerWidth);
-	}
-	
-	function generateStars(){
-		var i;
-		var j;
-		var s_n = '<div class="anim"><div id="ncont"><img src="./face_newton.png" id="newton_face" class="anim2"><img src="./tr_newt.png" id="newton_line" class="anim1"><p id="text1">Newton</p></div></div>';
-		var s_e = '<div id="econt" class="anim"><img src="./face_euler.png" id="euler_face" class="anim2"><img src="./tr_eul.png" id="euler_line" class="anim1"><p id="text2">Euler</p></div>';
-		var s_k = '<div id="kcont" class="anim"><img src="./face_kirchoff.png" id="kirchoff_face" class="anim2"><img src="./tr_kirch.png" id="kirchoff_line" class="anim1"><p id="text3">Kirchoff</p></div>';
-		for(j = 0; j < coord.length; j++){
-			for(i = 0; coord[j][i]; i++){
-				var coordji=coord[j][i];
-				switch(j){
-					case 0:
-					s_n += '<img src="./star.png" class="stars_an" id="star'+(j+1)+''+(i+1)+'"'+' width="'+Math.round(coordji[2]*r)+'px">';
-					break;
-					case 1:
-					s_e += '<img src="./star.png" class="stars_an" id="star'+(j+1)+''+(i+1)+'"'+' width="'+Math.round(coordji[2]*r)+'px">';
-					break;
-					case 2:
-					s_k += '<img src="./star.png" class="stars_an" id="star'+(j+1)+''+(i+1)+'"'+' width="'+Math.round(coordji[2]*r)+'px">';
-				}
-			}
-		}
-		document.getElementById("n").innerHTML = s_n;
-		document.getElementById("e").innerHTML = s_e;
-		document.getElementById("k").innerHTML = s_k;
-		for(j = 0; j < coord.length; j++){
-			for(i = 0; coord[j][i]; i++){
-				document.getElementById("star"+(j+1)+""+(i+1)).setAttribute("style","left:"+Math.round(coord[j][i][0]*r-(coord[j][i][2]/2)*r)+"px; top:"+Math.round(coord[j][i][1]*r-(coord[j][i][2]/2)*r)+"px;");
-			}
-		}
-	}
-	
-	function sparkling(){
-		var i, j, left, top, star;
-		for(j = 0; j < coord.length; j++){
-			for(i = 0; coord[j][i]; i++){
-				star = document.getElementById("star"+(j+1)+""+(i+1));
-				left = (star.style.left).replace("px","");
-				top = (star.style.top).replace("px", "");
-				star.setAttribute("style", "opacity:0.9; width:"+(Math.round(coord[j][i][2]*r)+2)+"px; left:"+(left-1)+"px; top:"+(top-1)+"px;");
-			}
-		}
-		setTimeout(function(){
-			for(j = 0; j < coord.length; j++){
-				for(i = 0; coord[j][i]; i++){
-					star = document.getElementById("star"+(j+1)+""+(i+1));
-					left = (star.style.left).replace("px","");
-					top = (star.style.top).replace("px", "");
-					star.setAttribute("style", "opacity:1; width:"+Math.round(coord[j][i][2]*r)+"px; left:"+(left-(-1))+"px; top:"+(top-(-1))+"px;");
-				}
-			}
-		},200);
 	}
 	
 </script>
